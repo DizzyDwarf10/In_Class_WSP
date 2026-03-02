@@ -1,0 +1,20 @@
+{
+  "name": "inclasswsp",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/DizzyDwarf10/In_Class#readme",
+  "bugs": {
+    "url": "https://github.com/DizzyDwarf10/In_Class/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DizzyDwarf10/In_Class.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
