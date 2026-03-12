@@ -1,12 +1,20 @@
 <script setup lang="ts">
+import type { Product } from "@/types"
 import { useProductStore } from "../stores/product"
+import { useCartStore } from "../stores/cart"
 import { onMounted } from "vue"
 
 const productStore = useProductStore()
+const cartStore = useCartStore()
 
 onMounted(() => {
     productStore.fetchProducts()
 })
+
+const addToCart = (product: Product) => {
+    cartStore.addItem(product)
+    console.log("Added to cart:", product)
+}
 </script>
 
 <template>
@@ -40,6 +48,11 @@ onMounted(() => {
                             </div>
                         </div>
                     </div>
+                    <footer class="card-footer">
+                        <button class="card-footer-item button is-primary" @click="addToCart(product)">
+                            Add to Cart
+                        </button>
+                    </footer>
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useCartStore } from "../stores/cart";
 
-const isActive = ref(false);    
+const cartStore = useCartStore();
 </script>
 
 <template>
@@ -15,7 +15,6 @@ const isActive = ref(false);
                 </a>
 
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                @click = "isActive = !isActive" :class="{ 'is-active': isActive }"
                    data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -24,7 +23,7 @@ const isActive = ref(false);
                 </a>
             </div>
 
-            <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': isActive }">
+            <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <RouterLink to="/" active-class="is-active" class="navbar-item">
                         Home
@@ -55,16 +54,17 @@ const isActive = ref(false);
                             </RouterLink>
                         </div>
                     </div>
+
+                    <RouterLink to="/cart" class="navbar-item button is-primary">
+                        🛒 {{ cartStore.items.length }}
+                    </RouterLink>
                 </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
                             <RouterLink to="/sign-up" active-class="is-active" class="button is-primary">
-                                <strong>Sign up</strong>
-                            </RouterLink>
-                            <RouterLink to="/log-in" active-class="is-active" class="button is-light">
-                                Log in
+                                Sign up
                             </RouterLink>
                         </div>
                     </div>
