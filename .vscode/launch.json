@@ -1,25 +1,50 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Debug Backend",
-            "type": "node",
-            "request": "launch",
-            "runtimeExecutable": "npx",
-            "runtimeArgs": ["tsx"],
-            "program": "${workspaceFolder}/server/index.ts",
-            "console": "integratedTerminal",
-            "skipFiles": ["<node_internals>/**"]
-        },
-        {
-            "name": "Debug Frontend",
-            "type": "node",
-            "request": "launch",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": ["run", "dev"],
-            "cwd": "${workspaceFolder}/client",
-            "console": "integratedTerminal",
-            "skipFiles": ["<node_internals>/**"]
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Backend",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug Frontend",
+      "type": "node-terminal",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/client",
+      "command": "npm run dev"
+    },
+    {
+      "name": "Launch Chrome (Vite)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/client",
+      "sourceMaps": true
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack: Chrome + Backend",
+      "configurations": [
+        "Debug Backend",
+        "Launch Chrome (Vite)"
+      ],
+      "stopAll": true
+    },
+    {
+      "name": "Full Stack: Frontend + Backend",
+      "configurations": [
+        "Debug Backend",
+        "Debug Frontend"
+      ],
+      "stopAll": true
+    }
+  ]
 }
