@@ -3,11 +3,8 @@ import { useCartStore } from "../stores/cart"
 
 const cartStore = useCartStore()
 
-const removeItem = (productId: number) => {
-    const index = cartStore.items.findIndex(item => item.id === productId)
-    if (index > -1) {
-        cartStore.items.splice(index, 1)
-    }
+const updateQuantity = (productId: number, quantity: number | string) => {
+    cartStore.updateQuantity(productId, Number(quantity))
 }
 </script>
 
@@ -33,10 +30,18 @@ const removeItem = (productId: number) => {
                 <tr v-for="item in cartStore.items" :key="item.id">
                     <td>{{ item.title }}</td>
                     <td>${{ item.price.toFixed(2) }}</td>
-                    <td>{{ item.quantity }}</td>
+                    <td>
+                        <input
+                            class="input is-small quantity-input"
+                            type="number"
+                            min="1"
+                            :value="item.quantity"
+                            @input="updateQuantity(item.id, ($event.target as HTMLInputElement).value)"
+                        >
+                    </td>
                     <td>${{ (item.price * item.quantity).toFixed(2) }}</td>
                     <td>
-                        <button class="button is-danger is-small" @click="removeItem(item.id)">
+                        <button class="button is-danger is-small" @click="cartStore.removeItem(item.id)">
                             Remove
                         </button>
                     </td>
@@ -47,4 +52,9 @@ const removeItem = (productId: number) => {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.quantity-input {
+    max-width: 4.5rem;
+    text-align: center;
+}
+</style>

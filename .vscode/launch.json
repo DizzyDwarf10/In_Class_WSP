@@ -6,12 +6,17 @@
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "tsx",
+        "server/index.ts"
+      ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "autoAttachChildProcesses": true,
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     },
     {
       "name": "Debug Frontend",
@@ -22,10 +27,12 @@
     },
     {
       "name": "Launch Chrome (Vite)",
-      "type": "chrome",
+      "type": "msedge",
       "request": "launch",
+      "preLaunchTask": "Frontend: Start Vite",
       "url": "http://localhost:5173",
       "webRoot": "${workspaceFolder}/client",
+      "runtimeExecutable": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
       "sourceMaps": true
     }
   ],
@@ -35,14 +42,6 @@
       "configurations": [
         "Debug Backend",
         "Launch Chrome (Vite)"
-      ],
-      "stopAll": true
-    },
-    {
-      "name": "Full Stack: Frontend + Backend",
-      "configurations": [
-        "Debug Backend",
-        "Debug Frontend"
       ],
       "stopAll": true
     }

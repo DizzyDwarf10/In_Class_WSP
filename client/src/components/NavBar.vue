@@ -56,7 +56,7 @@ const cartStore = useCartStore();
                     </div>
 
                     <RouterLink to="/cart" class="navbar-item button is-primary">
-                        🛒 {{ cartStore.items.length }}
+                        🛒 {{ cartStore.totalQuantity }}
                     </RouterLink>
                 </div>
 
