@@ -1,25 +1,14 @@
-import { defineStore } from "pinia"
-import type { Product } from "../types"
-import { ref } from "vue"
+import { defineStore } from 'pinia'
+import type { DataListEnvelope, Product, User } from '../../../server/types'
+import { ref } from 'vue'
+import { getProducts } from '../services/products'
 
-export const useProductStore = defineStore("product", () => {
-    const products = ref<Product[]>([])
-    const loading = ref(false)
-    const error = ref<string | null>(null)
+export const useProductsStore = defineStore('products', () => {
+  getProducts().then((data: DataListEnvelope<Product>) => {
+    products.value = data.data
+  })
 
-    const fetchProducts = async () => {
-        loading.value = true
-        error.value = null
-        try {
-            const res = await fetch('https://dummyjson.com/products')
-            const data = await res.json()
-            products.value = data.products
-        } catch (err) {
-            error.value = err instanceof Error ? err.message : 'Failed to fetch products'
-        } finally {
-            loading.value = false
-        }
-    }
+  const products = ref<Product[]>([])
 
-    return { products, loading, error, fetchProducts }
+  return { products }
 })
